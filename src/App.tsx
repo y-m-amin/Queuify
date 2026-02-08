@@ -1,5 +1,6 @@
 import { Suspense, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import type { Issue } from './types/issue';
 
 import vec1 from './assets/vector1.png';
 //import vec2 from './assets/vector2.png';
@@ -9,16 +10,17 @@ import Footer from './Components/Footer/Footer';
 import IssueCard from './Components/IssueCard/IssueCard';
 import Nav from './Components/Nav/Nav';
 
-const fetchIssues = async () => {
+const fetchIssues = async (): Promise<Issue[]> => {
   const res = await fetch('/issues.json');
   return res.json();
 };
+
 const issuesPromise = fetchIssues();
 
 function App() {
-  const [inProgress, setInProgress] = useState([]);
-  const [resolved, setResolved] = useState([]);
-  const [removeTickets, setRemoveTickets] = useState([]);
+  const [inProgress, setInProgress] = useState<Issue[]>([]);
+  const [resolved, setResolved] = useState<Issue[]>([]);
+  const [removeTickets, setRemoveTickets] = useState<number[]>([]);
 
   // const addToInProgress = (ticket) => {
   //   if (!inProgress.find((t) => t.id === ticket.id)) {
@@ -27,7 +29,7 @@ function App() {
   //   }
   // };
 
-  const markAsResolved = (ticket) => {
+  const markAsResolved = (ticket: Issue) => {
     setInProgress(inProgress.filter((t) => t.id !== ticket.id));
 
     setResolved([...resolved, ticket]);

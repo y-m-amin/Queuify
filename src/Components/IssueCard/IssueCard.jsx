@@ -37,9 +37,9 @@ const IssueCard = ({
   return (
     <div className='max-w-4/5 mx-auto my-10 flex flex-col-reverse lg:flex-row  gap-8'>
       <div className='flex-1 '>
-        <h1 className='text-3xl text-black font-bold mb-5'>Customer Tickets</h1>
+        <h1 className='text-3xl font-bold mb-5'>Customer Tickets</h1>
         {availableTickets.length === 0 ? (
-          <p className='text-gray-600'>No pending tickets!</p>
+          <p className='text-base-content/60'>No pending tickets!</p>
         ) : (
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-5'>
             {/* map only filtered tickets cards ,initially all tickets */}
@@ -48,11 +48,11 @@ const IssueCard = ({
               return (
                 <div
                   key={issue.id}
-                  className='bg-white shadow-xl rounded-lg p-5 cursor-pointer hover:shadow-2xl transition'
+                  className='bg-base-100 shadow-xl rounded-lg p-5 cursor-pointer hover:shadow-2xl transition'
                   onClick={() => handleAddToInProgress(issue)}
                 >
                   <div className='flex justify-between items-center mb-3'>
-                    <h2 className='text-xl text-black '>{issue.title}</h2>
+                    <h2 className='text-xl'>{issue.title}</h2>
                     <div
                       className={`flex items-center rounded-full ${
                         !isInProgress
@@ -71,8 +71,10 @@ const IssueCard = ({
                       </span>
                     </div>
                   </div>
-                  <p className='text-[#627382] mb-5'>{issue.description}</p>
-                  <div className='flex justify-between text-sm text-gray-600 '>
+                  <p className='text-base-content/70 mb-5'>
+                    {issue.description}
+                  </p>
+                  <div className='flex justify-between text-sm text-base-content/60 '>
                     <div className='flex gap-3'>
                       <span>#{issue.id}</span>
                       <span
@@ -102,11 +104,9 @@ const IssueCard = ({
 
       <aside className='w-full m-2 lg:w-72 mx-auto  flex  flex-col   gap-5'>
         <div className=' w-full p-5'>
-          <h3 className='text-[24px] text-black font-semibold mb-2'>
-            Task Status
-          </h3>
+          <h3 className='text-[24px] font-semibold mb-2'>Task Status</h3>
           {inProgress.length === 0 ? (
-            <p className='text-sm text-gray-600'>
+            <p className='text-sm text-base-content/60'>
               Select a ticket to add to Task Status
             </p>
           ) : (
@@ -114,9 +114,9 @@ const IssueCard = ({
               {inProgress.map((task) => (
                 <li
                   key={task.id}
-                  className='flex flex-col justify-between items-center bg-white p-2 rounded shadow'
+                  className='flex flex-col justify-between items-center bg-base-100 p-2 rounded shadow'
                 >
-                  <span className='text-black py-2'>{task.title}</span>
+                  <span className='py-2'>{task.title}</span>
                   <button
                     onClick={() => handleMarkAsResolved(task)}
                     className='w-[100%] text-[16px] font-semibold bg-[#02A53B] text-white px-2 py-2 rounded hover:bg-green-700'
@@ -130,17 +130,17 @@ const IssueCard = ({
         </div>
 
         <div className='w-full p-5'>
-          <h3 className='text-[24px] text-black font-semibold mb-2'>
-            Resolved Tasks
-          </h3>
+          <h3 className='text-[24px] font-semibold mb-2'>Resolved Tasks</h3>
           {resolved.length === 0 ? (
-            <p className='text-sm text-gray-600'>No resolved tasks yet.</p>
+            <p className='text-sm text-base-content/60'>
+              No resolved tasks yet.
+            </p>
           ) : (
             <ul className='space-y-2'>
               {resolved.map((task) => (
                 <li
                   key={task.id}
-                  className='text-[18px] font-medium  text-gray-700 bg-[#E0E7FF] p-3'
+                  className='text-[18px] font-medium bg-[#E0E7FF] p-3'
                 >
                   {task.title}
                 </li>

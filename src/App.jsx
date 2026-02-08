@@ -1,13 +1,13 @@
-import { useState, Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import vec1 from './assets/vector1.png';
 //import vec2 from './assets/vector2.png';
 
 import './App.css';
-import Nav from './Components/Nav/Nav';
 import Footer from './Components/Footer/Footer';
 import IssueCard from './Components/IssueCard/IssueCard';
+import Nav from './Components/Nav/Nav';
 
 const fetchIssues = async () => {
   const res = await fetch('/issues.json');
@@ -38,7 +38,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className='min-h-screen bg-base-200'>
       <Nav />
 
       {/* banner section div */}
@@ -47,6 +47,7 @@ function App() {
           <img
             src={vec1}
             className='hidden 2xl:block absolute left-0 top-1/2 -translate-y-1/2 '
+            alt='decoration'
           />
 
           <div className='relative flex flex-col items-center justify-center z-10'>
@@ -57,6 +58,7 @@ function App() {
           <img
             src={vec1}
             className='hidden 2xl:block absolute right-0 top-1/2 -translate-y-1/2 -scale-x-100 '
+            alt='decoration'
           />
         </div>
 
@@ -64,6 +66,7 @@ function App() {
           <img
             src={vec1}
             className='hidden 2xl:block absolute left-0 top-1/2 -translate-y-1/2 '
+            alt='decoration'
           />
 
           <div className='relative flex flex-col items-center justify-center z-10'>
@@ -74,6 +77,7 @@ function App() {
           <img
             src={vec1}
             className='hidden 2xl:block absolute right-0 top-1/2 -translate-y-1/2 -scale-x-100 '
+            alt='decoration'
           />
         </div>
       </div>
@@ -97,7 +101,7 @@ function App() {
 
       <Footer />
       <ToastContainer autoClose={1500} />
-    </>
+    </div>
   );
 }
 

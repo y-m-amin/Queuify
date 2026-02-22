@@ -2,6 +2,16 @@ import { use } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../App.css';
+import type { Issue } from '../../types';
+
+interface IssueCardProps {
+  issuesPromise: Promise<Issue[]>;
+  inProgress: Issue[];
+  resolved: Issue[];
+  removeTickets: number[];
+  setInProgress: React.Dispatch<React.SetStateAction<Issue[]>>;
+  markAsResolved: (task: Issue) => void;
+}
 
 const IssueCard = ({
   issuesPromise,
@@ -10,8 +20,8 @@ const IssueCard = ({
   removeTickets,
   setInProgress,
   markAsResolved,
-}) => {
-  const issues = use(issuesPromise);
+}: IssueCardProps) => {
+  const issues = use(issuesPromise) as Issue[];
 
   //filter out resolved tickets
   const availableTickets = issues.filter(
@@ -20,7 +30,7 @@ const IssueCard = ({
 
   //const isInProgress = inProgress.some((t) => t.id === issue.id);
 
-  const handleAddToInProgress = (issue) => {
+  const handleAddToInProgress = (issue: Issue) => {
     if (!inProgress.find((t) => t.id === issue.id)) {
       //not add again if already inside in-progess
 
@@ -29,7 +39,7 @@ const IssueCard = ({
     }
   };
 
-  const handleMarkAsResolved = (task) => {
+  const handleMarkAsResolved = (task: Issue) => {
     markAsResolved(task);
     toast.success(`Ticket "${task.title}" marked as Resolved`);
   };
